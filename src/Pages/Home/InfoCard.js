@@ -1,8 +1,7 @@
 import React from 'react';
 
-const InfoCard = ({ img, cardTitle, bgClass }) => {
-    // const { clock, marker, phone } = img;
-    // console.log(img);
+const InfoCard = (service) => {
+    const { img, cardTitle, bgClass } = service;
     return (
         <div>
             <div className={`card lg:card-side shadow-xl mb-5 ${bgClass}`}>
