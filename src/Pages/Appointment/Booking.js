@@ -1,13 +1,12 @@
 import React from 'react';
-import PrimaryButton from '../../Sheard/PrimaryButton';
 
-const Booking = ({ booking }) => {
 
+const Booking = ({ booking, setTreatment }) => {
     const { name, slots } = booking;
     return (
         <div className="card bg-base-100 shadow-xl">
             <div className="card-body">
-                <h2 className="card-title">{booking.name}</h2>
+                <h2 className="card-title">{name}</h2>
                 <p>{
                     slots.length > 0
                         ? <span>{slots[0]}</span>
@@ -15,9 +14,13 @@ const Booking = ({ booking }) => {
                 }</p>
                 <p>{slots.length} {slots.length > 1 ? 'spaces' : 'space'} available.</p>
                 <div className="card-actions justify-center">
-                    <button className='btn btn-secondary uppercase text-white'
-                        disabled={slots.length === 0}>Book Appointment</button>
+                    <label
+                        for="booking-modal"
+                        disabled={slots.length === 0}
+                        onClick={() => setTreatment(booking)}
+                        class="btn btn-secondary text-white uppercase">Book Appointment</label>
                 </div>
+
             </div>
         </div>
 
