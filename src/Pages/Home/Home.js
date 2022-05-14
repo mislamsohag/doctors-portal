@@ -1,5 +1,7 @@
 import React from 'react';
+import Footer from '../../Sheard/Footer';
 import Banner from './Banner';
+import ContactForm from './ContactForm';
 import Info from './Info';
 import MakeAppointment from './MakeAppointment';
 import ServiceDetails from './ServiceDetails';
@@ -17,6 +19,8 @@ const Home = () => {
             </div>
             <MakeAppointment></MakeAppointment>
             <Testimonial></Testimonial>
+            <ContactForm></ContactForm>
+            <Footer></Footer>
         </>
     );
 };
