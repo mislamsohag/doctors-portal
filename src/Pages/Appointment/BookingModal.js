@@ -2,33 +2,25 @@ import React from 'react';
 import { format } from 'date-fns';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './../../firebase.init';
-// import Booking from './Booking';
-// import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
     const { _id, name, slots } = treatment;
-
     const [user, loading, error] = useAuthState(auth);
-
     const formattedDate = format(date, 'PP');
-
     const handleBooking = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
-        // const name = event.target.name.value;
-        // const email = event.target.email.value;
-        // const phone = event.target.phone.value;
-        // console.log(slot, name, email, phone)
+
         const booking = {
             treatmentId: _id,
             treatment: name,
             date: formattedDate,
             slot,
+            patient: user.email,
             patientName: user.displayName,
-            patientEmail: user.email,
-            phone: event.target.phone.value,
+            phone: event.target.phone.value
         }
 
         fetch('http://localhost:5000/booking', {
@@ -49,7 +41,6 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
                 setTreatment(null);
             });
     }
-
     return (
         <div>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
