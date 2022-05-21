@@ -12,7 +12,7 @@ const AvailableAppointments = ({ date }) => {
 
     const formattedDate = format(date, 'PP');
 
-    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`https://boiling-plains-67002.herokuapp.com/available?date=${formattedDate}`)
         .then(res => res.json()))
 
     if (isLoading) {
@@ -20,7 +20,7 @@ const AvailableAppointments = ({ date }) => {
     }
     //নিচের useEffect এর পরিবর্তে সহয করার জন্য উপরোক্ত useQuery ব্যবহার
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    //     fetch(`https://boiling-plains-67002.herokuapp.com/available?date=${formattedDate}`)
     //         .then(res => res.json())
     //         .then(data => setServices(data));
     // }, [])
