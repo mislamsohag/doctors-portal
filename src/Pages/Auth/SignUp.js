@@ -4,8 +4,9 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from "react-hook-form";
 import Loading from '../../Sheard/Loading';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/useToken';
 
-const Register = () => {
+const SignUp = () => {
 
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
@@ -20,6 +21,8 @@ const Register = () => {
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    const [token] = useToken(user || gUser);
+
     const navigate = useNavigate();
 
     let signInError;
@@ -28,20 +31,21 @@ const Register = () => {
         return <Loading></Loading>
     }
 
-    if (gUser || user || updateError) {
-        console.log(gUser, user);
-    }
-
-    if (error || gError) {
+    if (error || gError || updateError) {
         signInError = <p className='text-red-600 text-center'>{error?.message || gError?.message || updateError?.message}</p>
     }
 
+    if (token) {
+        console.log(token)
+        navigate('/appointment');
+    }
+
     const onSubmit = async data => {
-        console.log(data);
+        // console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        console.log('Name Updated')
-        navigate('/appointment');
+        // console.log('Name Updated')
+
     }
 
     return (
@@ -149,4 +153,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default SignUp;

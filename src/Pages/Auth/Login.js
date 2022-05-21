@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import { useForm } from "react-hook-form";
 import Loading from '../../Sheard/Loading';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useToken from './../../Hooks/useToken';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -17,11 +18,21 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    //useToken Hooks
+    const [token] = useToken(gUser || user);
+
+    let signInError;
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
 
-    let signInError;
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true })
+        };
+    }, [token, navigate, location])
+
 
     if (loading || gLoading) {
         return <Loading></Loading>
@@ -32,21 +43,10 @@ const Login = () => {
         signInError = <p className='text-red-600 text-center'>{error?.message || gError?.message}</p>
     }
 
-    // useEffect(() => {
-    //     if (gUser || user) {
-    //         navigate(from, { replace: true });
-    //     }
-    // }, [gUser, user, navigate, location])
-
-    if (gUser || user) {
-        navigate(from, { replace: true })
-    };
-
-
-
     const onSubmit = data => {
         // console.log(data);
         signInWithEmailAndPassword(data.email, data.password);
+
     }
 
     return (
@@ -117,7 +117,7 @@ const Login = () => {
                             <input className='btn w-full max-w-xs' type="submit" value='Login' />
                         </form>
 
-                        <p className='text-center'><small>New to Doctors Portal? <Link to='/signup' className='text-blue-600'>Please Register First!</Link></small></p>
+                        <p className='text-center'><small>New to Doctors Portal? <Link to='/signup' className='text-blue-600'>Please Sign Up First!</Link></small></p>
 
                         <div className="divider">OR</div>
                         <div className="card-actions justify-center">

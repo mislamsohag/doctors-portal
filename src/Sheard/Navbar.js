@@ -9,6 +9,9 @@ const Navbar = () => {
 
     const logout = () => {
         signOut(auth);
+        //এর মাধ্যমে লোকাল স্টোরেজ থেকে তথ্য মুছে ফেলা
+        localStorage.removeItem('accessToken');
+
     };
 
     const manuItems = <>

@@ -2,18 +2,28 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import BookingModal from './BookingModal';
 import Service from './Service';
+import { useQuery } from 'react-query';
+import Loading from '../../Sheard/Loading';
 
 
 const AvailableAppointments = ({ date }) => {
-    const [services, setServices] = useState([]);
+    // const [services, setServices] = useState([]);
     const [treatment, setTreatment] = useState(null);
 
     const formattedDate = format(date, 'PP');
-    useEffect(() => {
-        fetch(`http://localhost:5000/available?date=${formattedDate}`)
-            .then(res => res.json())
-            .then(data => setServices(data));
-    }, [])
+
+    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
+        .then(res => res.json()))
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+    //নিচের useEffect এর পরিবর্তে সহয করার জন্য উপরোক্ত useQuery ব্যবহার
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    //         .then(res => res.json())
+    //         .then(data => setServices(data));
+    // }, [])
 
     return (
         <div className='my-10'>
@@ -31,6 +41,7 @@ const AvailableAppointments = ({ date }) => {
                 date={date}
                 treatment={treatment}
                 setTreatment={setTreatment}
+                refetch={refetch}
             ></BookingModal>}
         </div>
     );
