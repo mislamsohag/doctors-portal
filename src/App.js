@@ -17,6 +17,7 @@ import MyReview from './Pages/Dashboard/MyReview';
 import SignUp from './Pages/Auth/SignUp';
 import Users from './Pages/Dashboard/Users';
 import RequireAdmin from './Pages/Auth/RequierAdmin';
+import AddDoctor from './Pages/Dashboard/AddDoctor';
 
 
 
@@ -38,13 +39,8 @@ function App() {
             <Route index element={<MyAppointments />}></Route>
             <Route path="review" element={<MyReview />}></Route>
             <Route path="history" element={<MyHistory />}></Route>
-            <Route path="users" element=
-              {
-                <RequireAdmin>
-                  <Users></Users>
-                </RequireAdmin>
-              }
-            ></Route>
+            <Route path="users" element={<RequireAdmin><Users></Users></RequireAdmin>}></Route>
+            <Route path="addDoctor" element={<RequireAdmin><AddDoctor></AddDoctor></RequireAdmin>}></Route>
           </Route>
           < Route path="contact" element={<ContactForm />} />
           <Route path="login" element={<Login />} />
