@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const { data: services, isLoading } = useQuery('services', () => fetch(`http://localhost:5000/service`).then(res => res.json()))
+    const { data: services, isLoading } = useQuery('services', () => fetch(`https://boiling-plains-67002.herokuapp.com/service`).then(res => res.json()))
 
     if (isLoading) {
         return <Loading></Loading>
@@ -47,7 +47,7 @@ const AddDoctor = () => {
                         img: img,
                     }
                     //send to database
-                    fetch('http://localhost:5000/doctor', {
+                    fetch('https://boiling-plains-67002.herokuapp.com/doctor', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
