@@ -31,9 +31,6 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <div className='py-5 text-center text-white bg-slate-700'>
-                <p>Copyright &copy; 2022 - All right reserved By <span className='text-green-400'>Md. Fakrul Islam Chowdhury</span></p>
-            </div>
         </>
     );
 };

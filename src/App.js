@@ -26,7 +26,7 @@ import Payment from './Pages/Dashboard/Payment';
 function App() {
   return (
     <>
-      <div className='max-w-7xl mx-auto px-12'>
+      <div className='max-w-7xl mx-auto px-10'>
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -52,6 +52,9 @@ function App() {
         </Routes>
         <ToastContainer />
       </div>
+      <footer className='py-5 text-center text-white bg-slate-700'>
+        <p>Copyright &copy; 2022 - All right reserved By <span className='text-green-400'>Md. Fakrul Islam Chowdhury</span></p>
+      </footer>
     </>
 
   );

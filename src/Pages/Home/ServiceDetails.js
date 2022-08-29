@@ -6,9 +6,9 @@ const ServiceDetails = () => {
     return (
 
         <>
-            <div className="flex card md:card-side lg:card-side bg-base-100 shadow-xl mb-20">
-                <figure className='flex-1'>
-                    <img src={treatment} alt="Album" />
+            <div className="flex card md:card-side lg:card-side bg-base-100 shadow-xl mb-10">
+                <figure className='flex-1 content-center py-10'>
+                    <img className='object-cover h-80 w-96 rounded-xl ' src={treatment} alt="Album" />
 
                 </figure>
                 <div className="flex-1 card-body justify-center items-center">
